@@ -1,0 +1,44 @@
+{
+  "name": "onefile-lint",
+  "version": "0.1.0",
+  "description": "Lints agent-made single-file HTML pages for remote dependencies, size, contrast, reduced motion, print and offline use.",
+  "type": "module",
+  "bin": {
+    "onefile-lint": "bin/onefile-lint.mjs"
+  },
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "catalogue",
+    "awesome",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test",
+    "catalogue": "node scripts/build-catalogue.mjs",
+    "corpus": "node scripts/corpus.mjs",
+    "list:refresh": "node scripts/refresh-list.mjs"
+  },
+  "keywords": [
+    "html",
+    "single-file",
+    "lint",
+    "offline",
+    "agents",
+    "artifacts"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reidifydesign/onefile-lint.git"
+  },
+  "homepage": "https://reidify.design/open-source"
+}
