@@ -188,6 +188,17 @@ test('landmarks: only for pages with real text', () => {
   assert.equal(res('<p>short</p>', 'landmarks').status, 'OK');
 });
 
+test('the display and robustness extras are opt-out and never fail a page on their own', () => {
+  const src = fs.readFileSync(new URL('./fixtures/bad.html', import.meta.url), 'utf8');
+  const all = lint(src);
+  const extras = all.results.filter((r) => r.group === 'display' || r.group === 'robustness');
+  assert.ok(extras.length >= 11);
+  assert.ok(extras.every((r) => r.status !== 'FAIL'));
+  const core = lint(src, { skip: ['display', 'robustness'] });
+  assert.deepEqual(core.results.map((r) => r.id), all.results.filter((r) => r.group === 'portability').map((r) => r.id));
+  assert.ok(core.results.every((r) => r.group === 'portability'));
+});
+
 test('options: only, skip (rule and group) and strict', () => {
   const src = fs.readFileSync(new URL('./fixtures/bad.html', import.meta.url), 'utf8');
   assert.deepEqual(lint(src, { only: ['size'] }).results.map((r) => r.id), ['size']);

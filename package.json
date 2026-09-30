@@ -1,7 +1,7 @@
 {
   "name": "onefile-lint",
   "version": "0.1.0",
-  "description": "Lints agent-made single-file HTML pages for remote dependencies, size, contrast, reduced motion, print and offline use.",
+  "description": "Checks that an agent-made single-file HTML page is still one portable file: no remote dependencies, size, print and offline use. Optional accessibility-adjacent extras.",
   "type": "module",
   "bin": {
     "onefile-lint": "bin/onefile-lint.mjs"
@@ -32,6 +32,7 @@
     "single-file",
     "lint",
     "offline",
+    "portability",
     "agents",
     "artifacts"
   ],

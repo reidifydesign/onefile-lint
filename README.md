@@ -1,6 +1,6 @@
 # onefile-lint
 
-Lints agent-made single-file HTML pages for remote dependencies, size, contrast, reduced motion, print and offline use.
+Checks that an agent-made single-file HTML page is still one portable file: no remote dependencies, a sensible size, print styles, and use offline.
 
 ![onefile-lint run on a real agent-made page: one failure for remote dependencies, three warnings](docs/example-output.png)
 
@@ -19,8 +19,8 @@ A one-file page is only useful if it stays one file. A CDN script tag, a web fon
 What it found on its first real run, on 30 Sep 2026, across those 237 pages (commit `83a5d43`):
 
 - 75 (32%) load something from another host, and 12 more point at files next to the page.
-- 187 (79%) have no print styles, and 79 (33%) have motion with no reduced-motion path.
-- Just 3 pass every rule. The full table is in [the catalogue](catalogue/CATALOGUE.md), and the per-page data is in [`data/`](data/).
+- 187 (79%) have no print styles.
+- Just 3 pass every rule, including the optional display and robustness extras described below. The full table is in [the catalogue](catalogue/CATALOGUE.md), and the per-page data is in [`data/`](data/).
 
 These are counts of what a static check can see in one author's pages. They are not a measure of how agents behave in general.
 
@@ -32,22 +32,29 @@ onefile-lint ./dist --strict               # every .html under a folder, fail on
 onefile-lint https://example.com/tool.html # fetch and lint a URL
 cat page.html | onefile-lint -             # stdin
 onefile-lint page.html --format json       # for tools; also: markdown, for pull request comments
-onefile-lint explain contrast              # what a rule checks, why, and the evidence behind it
+onefile-lint explain remote-dependency      # what a rule checks, why, and the evidence behind it
 ```
 
-The rules, in three groups:
+The rules, in three groups. Portability is what the tool is for:
 
 | Group | Rules |
 | --- | --- |
 | portability | `remote-dependency`, `sibling-file`, `size`, `offline`, `print-styles`, `document-basics` |
+
+Two more groups are extras. They are accessibility-adjacent checks for things agents often get wrong on screen. They are on by default and you can switch them off:
+
+| Extra group | Rules |
+| --- | --- |
 | display | `contrast`, `reduced-motion`, `viewport-height`, `focus-outline`, `zoom-blocked` |
 | robustness | `form-labels`, `img-alt`, `control-name`, `positive-tabindex`, `click-target`, `landmarks` |
+
+Opt out of all the extras with `--skip display,robustness`, which leaves the portability checks alone, or of a single rule with `--skip contrast`. From the library, pass `skip: ['display', 'robustness']`. Every extra reports at warning level, so none of them fails a page unless you run with `--strict`.
 
 Options:
 
 | Option | What it does |
 | --- | --- |
-| `--skip a,b` / `--only a,b` | Skip or run only these rules or groups, for example `--skip contrast` or `--only portability` |
+| `--skip a,b` / `--only a,b` | Skip or run only these rules or groups, for example `--skip display,robustness` or `--only portability` |
 | `--allow-host a.com,b.com` | Do not count remote references to hosts you accept, such as a CDN you have decided to trust |
 | `--warn-kb N` / `--fail-kb N` | Size limits in KB. Defaults are 1024 and 5120, which are this tool's choice, not a standard |
 | `--strict` | Exit 1 on warnings as well as failures |

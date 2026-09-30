@@ -11,7 +11,8 @@ const pkg = JSON.parse(fs.readFileSync(path.join(here, '..', 'package.json'), 'u
 const GROUPS = ['portability', 'display', 'robustness'];
 
 const HELP = `onefile-lint ${pkg.version}
-Lints single-file HTML pages for remote dependencies, size, contrast, reduced motion, print and offline use.
+Checks that a single-file HTML page is still one portable file: remote dependencies, size, print and offline use.
+The display and robustness groups are optional extras: --skip display,robustness turns them off.
 
 Usage
   onefile-lint <file|folder|url|->...    lint pages (a folder is searched for .html files)
@@ -22,7 +23,7 @@ Options
   --format text|json|markdown   output format (default text)
   --strict                      exit 1 on warnings as well as failures
   --only a,b                    run only these rules or groups (${GROUPS.join(', ')})
-  --skip a,b                    skip these rules or groups, for example --skip contrast
+  --skip a,b                    skip these rules or groups, for example --skip display,robustness
   --allow-host a.com,b.com      do not count remote references to these hosts
   --warn-kb N                   size warning limit in KB (default ${DEFAULTS.warnKb})
   --fail-kb N                   size failure limit in KB (default ${DEFAULTS.failKb})
