@@ -1,0 +1,301 @@
+{
+  "updated": "2026-09-30",
+  "about": "Every check in onefile-lint, with the evidence behind it. Grades describe the evidence, not how bad the failure is. Frequencies are quoted only where a source states them; everything else says so.",
+  "grades": {
+    "A": "measured on AI-generated pages or code, in a cited study or evaluation",
+    "B": "measured on the wider web, or named as a failure in a standard or official documentation",
+    "C": "reported by practitioners, not measured",
+    "D": "no public evidence found yet"
+  },
+  "sources": {
+    "ms-eval": {
+      "title": "A11y LLM Eval report (Microsoft, GitHub Copilot SDK runs)",
+      "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html",
+      "read": "2026-09-30",
+      "scope": "8 models, 32 prompt cases, 1280 control samples, run without accessibility instructions. [[CONFIRM: report generation date]]"
+    },
+    "suh-2025": {
+      "title": "Human or LLM? A Comparative Study on Accessible Code Generation Capability (Suh, Tafreshipour, Malek, Ahmed; arXiv, 20 Mar 2025)",
+      "url": "https://arxiv.org/html/2503.15885v1",
+      "read": "2026-09-30",
+      "scope": "GPT-4o and Qwen2.5-Coder against human-written pages, scored with AChecker and QualWeb"
+    },
+    "a11yn": {
+      "title": "A11yn: Aligning LLMs for Web Accessibility-Aware UI Generation (Yoon et al.; arXiv 2510.13914, submitted 15 Oct 2025)",
+      "url": "https://arxiv.org/html/2510.13914v1",
+      "read": "2026-09-30",
+      "scope": "baseline Qwen2.5-Coder-7B-Instruct on the RealUIReq-300 benchmark; counts are average violations per the paper's Table 2"
+    },
+    "webaim-2026": {
+      "title": "The WebAIM Million, February 2026",
+      "url": "https://webaim.org/projects/million/",
+      "read": "2026-09-30",
+      "scope": "1,000,000 home pages; 95.9% had detected WCAG 2 failures. Human-made pages, not agent output"
+    }
+  },
+  "rules": [
+    {
+      "id": "remote-dependency",
+      "group": "portability",
+      "level": "error",
+      "title": "No remote dependencies",
+      "what": "Scripts, stylesheets, fonts, frames, imports, images, audio, video and icons that load from another host, including CSS url() and @import, JavaScript import and import(), and import maps.",
+      "why": "A page that needs another host stops working offline, behind a firewall, or when that host changes or disappears. Scripts, stylesheets, fonts and frames are failures because the page breaks or changes; images, media and icons are warnings because it only degrades.",
+      "how": "Reads every URL in markup, inline CSS, style attributes and inline scripts. Anything starting with http(s):// or // counts. data:, blob: and #fragments do not. Use --allow-host to ignore hosts you accept.",
+      "limits": "Sees only URLs written out as text. Scripts that build a URL at run time are not seen. Links (<a href>) are not dependencies and are ignored.",
+      "evidence": [
+        {"grade": "C", "finding": "Simon Willison, 10 Dec 2025, describes loading libraries from a CDN as a standard pattern for single-file tools built with LLMs, so remote dependencies are common by design, not by accident.", "url": "https://simonwillison.net/2025/Dec/10/html-tools/", "read": "2026-09-30"},
+        {"grade": "C", "finding": "Simon Willison, 9 Jul 2024: Claude Artifacts can load most code that is available via cdnjs, so pages made there usually carry CDN URLs.", "url": "https://simonwillison.net/2024/Jul/9/claude-share-artifacts/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "sibling-file",
+      "group": "portability",
+      "level": "error",
+      "title": "No sibling files",
+      "what": "Relative references (style.css, ./app.js, images/logo.png, /favicon.ico) in the same places remote-dependency reads.",
+      "why": "A page that points at files next to it is not one file. Email it, paste it into a chat or drop it into a gist and those references break.",
+      "how": "Same scan as remote-dependency. Any URL that is not remote, not data:/blob:/# is treated as a file next to the page.",
+      "limits": "A page that is meant to be served from a site with its own /favicon.ico will warn. That is a choice; skip the rule with --skip sibling-file.",
+      "evidence": [
+        {"grade": "D", "finding": "No public measurement found of how often agent output leaves sibling-file references. [[CONFIRM: frequency in agent-made pages]]", "url": "https://github.com/simonw/tools", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "size",
+      "group": "portability",
+      "level": "warn",
+      "title": "Size",
+      "what": "File size in bytes and gzipped, the split between script, style and embedded data URIs, and a warning when base64 data takes over the file.",
+      "why": "A single file has to be downloaded, pasted or attached whole. Base64 is about a third larger than the bytes it encodes.",
+      "how": "Warns above 1024 KB and fails above 5120 KB by default. Change with --warn-kb and --fail-kb. Those limits are this tool's defaults, not a standard.",
+      "limits": "Size is reported for the decoded text of the file. The limits are a judgment call and depend on where the page will travel.",
+      "evidence": [
+        {"grade": "D", "finding": "No source found that sets a sensible size budget for a single-file page. The defaults are the author's choice. [[CONFIRM: a sourced budget]]", "url": "https://news.ycombinator.com/item?id=49008211", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "offline",
+      "group": "portability",
+      "level": "warn",
+      "title": "Works offline",
+      "what": "Network calls in the page's own code: fetch, XMLHttpRequest, WebSocket, EventSource, sendBeacon, service worker registration, absolute form actions, and a linked web app manifest.",
+      "why": "Commenters in the Bento discussion on Hacker News singled out offline use. A service worker cannot help a single file: it must be a separate script and runs only over HTTPS or on localhost.",
+      "how": "Reads inline scripts for calls whose URL is a string literal.",
+      "limits": "Calls to a URL built at run time are not seen. A page that calls an API on purpose will warn; that is information, not a bug.",
+      "evidence": [
+        {"grade": "C", "finding": "Commenters on the Bento thread (1,033 points, 22 Jul 2026) singled out offline use as the standout feature of a one-file page.", "url": "https://news.ycombinator.com/item?id=49008211", "read": "2026-09-30"},
+        {"grade": "B", "finding": "MDN: service workers are restricted to HTTPS (localhost is allowed for development) and are registered from a separate script file.", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "print-styles",
+      "group": "portability",
+      "level": "warn",
+      "title": "Print styles",
+      "what": "Whether the page has any @media print or @page rules, and two cases where having none does damage: a dark background, and a page root with overflow hidden or height 100vh.",
+      "why": "Pages made to be shared get printed or saved as PDF. MDN notes that browsers may leave backgrounds out of print, which can leave light text on white paper.",
+      "how": "Looks for @media print, @page and a print stylesheet link. Skips pages with almost no text.",
+      "limits": "Pages whose content is drawn by script after load can look empty to a static check and are skipped. The check does not render the page.",
+      "evidence": [
+        {"grade": "B", "finding": "MDN, print-color-adjust: a browser may leave out background images and adjust text colours when printing to suit white paper.", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust", "read": "2026-09-30"},
+        {"grade": "C", "finding": "The Bento author said PDF printing works well in Chrome, which shows printing is part of how one-file decks are used.", "url": "https://news.ycombinator.com/item?id=49008211", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "document-basics",
+      "group": "portability",
+      "level": "warn",
+      "title": "Document basics",
+      "what": "A doctype, a <meta charset> in the first 1024 bytes, a viewport meta tag, a lang attribute on <html>, and a page title.",
+      "why": "A page opened from disk has no server sending its encoding, so the charset tag has to do that job. Without it, non-ASCII text can show garbled. Without a viewport tag phones render at desktop width.",
+      "how": "Text checks on the start of the file and the parsed tags. A missing charset is a failure only when the file contains non-ASCII text.",
+      "limits": "Checks presence, not whether the values are right.",
+      "evidence": [
+        {"grade": "B", "finding": "MDN: a <meta> that declares the character encoding must be entirely within the first 1024 bytes of the document.", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta", "read": "2026-09-30"},
+        {"grade": "B", "finding": "WebAIM Million 2026: 13.5% of home pages were missing a document language.", "url": "https://webaim.org/projects/million/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "contrast",
+      "group": "display",
+      "level": "warn",
+      "title": "Text contrast",
+      "what": "Text and background colour pairs that fall under 4.5:1 (3:1 for large text), read from CSS in the same rule, for light and dark mode, with custom properties resolved.",
+      "why": "Low contrast was the most common or second most common failure in all three agent-output sources read, and it is the most common failure on the wider web.",
+      "how": "Resolves var() from :root, parses hex, rgb, hsl, oklab, oklch and common colour names, and computes the WCAG 2 ratio. A colour with no background in its rule is checked against the page background and shown only as a note.",
+      "limits": "Reads CSS text, not computed styles. Gradients, images, color-mix(), lab() and currentcolor are skipped, never guessed. Text on a card is not compared with the page behind the card. Tools that render the page will find more. Skip with --skip contrast.",
+      "evidence": [
+        {"grade": "A", "finding": "A11y LLM Eval: colour contrast was 89.1% of axe failures across all models and cases.", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"},
+        {"grade": "A", "finding": "Suh et al. 2025: contrast issues were 80% of all violations when scored with AChecker.", "url": "https://arxiv.org/html/2503.15885v1", "read": "2026-09-30"},
+        {"grade": "A", "finding": "A11yn: colour contrast was the second most common violation for the baseline model, 702 on average.", "url": "https://arxiv.org/html/2510.13914v1", "read": "2026-09-30"},
+        {"grade": "B", "finding": "WebAIM Million 2026: low-contrast text on 83.9% of home pages.", "url": "https://webaim.org/projects/million/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "reduced-motion",
+      "group": "display",
+      "level": "warn",
+      "title": "Reduced motion",
+      "what": "Animation (CSS animation, @keyframes, movement transitions, smooth scrolling, autoplay video, requestAnimationFrame, Web Animations) with no prefers-reduced-motion query or check anywhere in the page.",
+      "why": "MDN names vestibular motion disorders as the reason people turn motion off.",
+      "how": "Counts motion sources and looks for the prefers-reduced-motion media query in CSS or a matchMedia check in script. Colour and opacity transitions are not counted.",
+      "limits": "Does not judge whether the reduced-motion path is good, only that one exists. A requestAnimationFrame loop may be a game or a chart, where the right answer differs.",
+      "evidence": [
+        {"grade": "B", "finding": "MDN: prefers-reduced-motion exists so pages can remove, reduce or replace motion; scaling or panning large objects can trigger vestibular discomfort.", "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion", "read": "2026-09-30"},
+        {"grade": "D", "finding": "No public measurement found of how often agent output ignores reduced motion. [[CONFIRM: frequency in agent-made pages]]", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "viewport-height",
+      "group": "display",
+      "level": "warn",
+      "title": "Viewport height",
+      "what": "height: 100vh with no dvh or svh line in the same rule, overflow hidden on html or body, and a fixed pixel height on the page root.",
+      "why": "On phones 100vh is the height with the browser bar hidden, so a full-height block spills below the visible area. Overflow hidden on the page root makes anything below the fold unreachable and cuts printouts to one page.",
+      "how": "Reads height and overflow declarations in CSS rules.",
+      "limits": "Does not know whether a 100vh element is meant to overflow, such as a hero section. Treat as a prompt to look.",
+      "evidence": [
+        {"grade": "B", "finding": "web.dev, 29 Nov 2022: elements sized to 100vh bleed out of the viewport while browser toolbars are showing; svh, lvh and dvh units fix it.", "url": "https://web.dev/blog/viewport-units", "read": "2026-09-30"},
+        {"grade": "D", "finding": "No public measurement found of how often agent output uses 100vh. [[CONFIRM: frequency in agent-made pages]]", "url": "https://web.dev/blog/viewport-units", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "focus-outline",
+      "group": "display",
+      "level": "warn",
+      "title": "Focus outline",
+      "what": "outline: none or 0 on a rule when nothing else in the page draws a focus indicator.",
+      "why": "Keyboard users lose track of where they are. W3C lists removing the focus indicator as a failure of success criterion 2.4.7.",
+      "how": "Finds outline removal, then looks for a :focus or :focus-visible style that draws something, or a replacement in the same rule.",
+      "limits": "A replacement set in script or a parent rule can be missed. The check is on CSS text.",
+      "evidence": [
+        {"grade": "B", "finding": "WCAG 2.4.7 Understanding: styling outlines so the focus indicator becomes non-visible is a listed failure (F78).", "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html", "read": "2026-09-30"},
+        {"grade": "D", "finding": "No public measurement found of how often agent output removes the focus ring. [[CONFIRM: frequency in agent-made pages]]", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "zoom-blocked",
+      "group": "display",
+      "level": "warn",
+      "title": "Pinch zoom",
+      "what": "user-scalable=no or 0, or maximum-scale below 2, in the viewport meta tag.",
+      "why": "People who need larger text cannot zoom. The W3C test rule treats user-scalable=no and maximum-scale under 2 as failures.",
+      "how": "Parses the viewport content attribute.",
+      "limits": "Checks the tag only, not page-level scripts that intercept gestures.",
+      "evidence": [
+        {"grade": "B", "finding": "W3C ACT rule b4f0c3: fails if the viewport sets user-scalable to no or maximum-scale to less than 2; WCAG 1.4.4 asks for text resizing to 200%.", "url": "https://www.w3.org/WAI/standards-guidelines/act/rules/b4f0c3/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "form-labels",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Form labels",
+      "what": "Inputs, selects and textareas with no label for= link, wrapping label, aria-label, aria-labelledby or title. A placeholder alone is reported separately.",
+      "why": "A field with no programmatic label has no name for a screen reader, and a placeholder disappears as soon as someone types.",
+      "how": "Matches label for= to ids, walks up to a wrapping <label>, and checks the naming attributes.",
+      "limits": "A visible <label> that is not linked counts as unlabelled, which is correct but can surprise. Names set by script are not seen.",
+      "evidence": [
+        {"grade": "A", "finding": "A11y LLM Eval: form labels and required-field indicators failed in 5% to 70% of samples depending on the case; helper-text association failed in 50% to 100%.", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"},
+        {"grade": "B", "finding": "WebAIM Million 2026: missing form input labels on 51% of home pages.", "url": "https://webaim.org/projects/million/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "img-alt",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Image alt text",
+      "what": "<img> elements with no alt attribute at all. alt=\"\" for decoration passes.",
+      "why": "Without alt, screen readers read the file name.",
+      "how": "Checks for the attribute, not its quality.",
+      "limits": "Does not judge whether alt text is useful, or whether an image of text should be real text.",
+      "evidence": [
+        {"grade": "B", "finding": "WebAIM Million 2026: missing alternative text on 53.1% of home pages.", "url": "https://webaim.org/projects/million/", "read": "2026-09-30"},
+        {"grade": "A", "finding": "Suh et al. 2025 found GPT-4o improved alternative text handling by over 70% against human code. Models do better here than elsewhere, so expect few hits from agent output.", "url": "https://arxiv.org/html/2503.15885v1", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "control-name",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Button and link names",
+      "what": "Buttons and links with no text, aria-label, title, image alt or svg title.",
+      "why": "An icon-only button with no name is announced as just \"button\".",
+      "how": "Looks at text inside the element and the naming attributes of it and its children.",
+      "limits": "Icon fonts drawn with CSS content are invisible to this check and read as empty.",
+      "evidence": [
+        {"grade": "A", "finding": "A11yn: link-name was the fourth most common baseline violation, 129 on average.", "url": "https://arxiv.org/html/2510.13914v1", "read": "2026-09-30"},
+        {"grade": "B", "finding": "WebAIM Million 2026: empty links on 46.3% and empty buttons on 30.6% of home pages.", "url": "https://webaim.org/projects/million/", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "positive-tabindex",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Tab order",
+      "what": "tabindex with a value above 0.",
+      "why": "Positive values pull an element ahead of the natural tab order and usually break the reading sequence. W3C failure F44 covers tab orders that do not preserve meaning; positive tabindex is a common way to cause it.",
+      "how": "Reads the attribute.",
+      "limits": "A deliberate positive tabindex is rare but possible.",
+      "evidence": [
+        {"grade": "B", "finding": "WCAG 2.4.3 Understanding lists F44, using tabindex to create a tab order that does not preserve meaning and operability. The page does not name positive values specifically.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html", "read": "2026-09-30"},
+        {"grade": "D", "finding": "No public measurement found for agent output. [[CONFIRM: frequency in agent-made pages]]", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "click-target",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Keyboard-reachable clicks",
+      "what": "An inline onclick on an element that a keyboard cannot reach: no role and no tabindex, and not a button, link or form control.",
+      "why": "A div that acts as a button works with a mouse only. W3C lists emulating links this way as failure F42.",
+      "how": "Inline onclick attributes only.",
+      "limits": "Listeners added with addEventListener cannot be matched to elements without running the page, so most modern code is not covered.",
+      "evidence": [
+        {"grade": "B", "finding": "WCAG 2.1.1 Understanding lists F42, a failure when static elements are made to act as links without keyboard support.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html", "read": "2026-09-30"},
+        {"grade": "D", "finding": "No public measurement found for agent output. [[CONFIRM: frequency in agent-made pages]]", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ]
+    },
+    {
+      "id": "landmarks",
+      "group": "robustness",
+      "level": "warn",
+      "title": "Main landmark",
+      "what": "A page with real text content and no <main> element or role=\"main\".",
+      "why": "Screen reader users jump between landmarks. Missing landmarks were the most common baseline violation in one agent-output study and a large share of best-practice failures in another.",
+      "how": "Looks for <main> or role=main when the page has at least 200 characters of text.",
+      "limits": "Does not check the other landmarks (header, nav, footer) or that content sits inside them.",
+      "evidence": [
+        {"grade": "A", "finding": "A11yn: region (content outside landmarks) was the most common baseline violation, 894 on average, and landmark-one-main the third, 164.", "url": "https://arxiv.org/html/2510.13914v1", "read": "2026-09-30"},
+        {"grade": "A", "finding": "A11y LLM Eval: landmark structure was 37% to 44% of best-practice failures.", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ]
+    }
+  ],
+  "not_checked": [
+    {
+      "id": "modal-focus",
+      "title": "Modal dialog focus and keyboard behaviour",
+      "evidence": [
+        {"grade": "A", "finding": "A11y LLM Eval: modal dialog behaviour (hiding background content, focus management, keyboard trapping) failed in 52% to 92% of samples.", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ],
+      "why_not": "Needs a browser that opens the dialog and presses Tab. A static check cannot tell."
+    },
+    {
+      "id": "skip-link",
+      "title": "Skip navigation links",
+      "evidence": [
+        {"grade": "A", "finding": "A11y LLM Eval: skip navigation links were missing in all Shopping Home Page samples.", "url": "https://microsoft.github.io/a11y-llm-eval-report/index.html", "read": "2026-09-30"}
+      ],
+      "why_not": "Only matters on pages with repeated navigation, which is rare in one-file pages. Could be added as a check for pages with a <nav> and no skip link."
+    },
+    {
+      "id": "aria-misuse",
+      "title": "ARIA attributes that are present but wrong",
+      "evidence": [
+        {"grade": "A", "finding": "Suh et al. 2025: models did worse than human developers on complex ARIA requirements, for example graphics labelling.", "url": "https://arxiv.org/html/2503.15885v1", "read": "2026-09-30"}
+      ],
+      "why_not": "Judging ARIA needs the accessibility tree, which needs a rendered page."
+    }
+  ]
+}
