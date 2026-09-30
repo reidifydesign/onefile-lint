@@ -1,0 +1,29 @@
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="https://cdn.example.com/site.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/vue@3"></script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Inter");
+body { background: #111; color: #eee; height: 100vh; overflow: hidden; }
+.muted { color: #999; background: #fff; font-size: 14px; }
+.card { animation: spin 2s infinite; transition: transform .3s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+button { outline: none; }
+.bg { background: url(https://images.example.com/a.jpg); }
+</style>
+</head>
+<body>
+<div onclick="go()">Click me</div>
+<img src="photo.png">
+<input type="text" placeholder="Name">
+<button><svg></svg></button>
+<a href="/x"></a>
+<div tabindex="3">x</div>
+<script>
+fetch("https://api.example.com/data");
+navigator.serviceWorker.register('/sw.js');
+</script>
+</body>
+</html>
