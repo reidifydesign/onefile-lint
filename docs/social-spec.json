@@ -1,0 +1,1 @@
+{ "theme": "reidify", "pre": "Lint the ", "accent": "one-file", "post": " pages your agent makes.", "sub": "npx github:reidifydesign/onefile-lint page.html", "prompt": true, "repo": "reidifydesign/onefile-lint", "size": 68 }

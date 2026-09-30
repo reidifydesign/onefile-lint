@@ -1,0 +1,29 @@
+annotated-presentations.html  20.6 KB
+
+FAIL  remote-dependency  3 remote references: fonts.googleapis.com, cdn.jsdelivr.net, plausible.io
+        line 7   stylesheet loads from the network: https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&d...
+        line 292 script loads from the network: https://cdn.jsdelivr.net/npm/marked@4.3.0/lib/marked.umd.min.js
+        line 293 script loads from the network: https://plausible.io/js/plausible.js
+OK    sibling-file       no relative file references
+OK    size               20.6 KB, 5.3 KB gzipped; script 11.8 KB, style 6.1 KB
+OK    offline            no network calls found in inline scripts (dynamic URLs cannot be seen)
+WARN  print-styles       no print rules
+                 no @media print rules, so the page prints exactly as it looks on screen
+OK    document-basics    doctype, charset, viewport, lang and title present
+OK    contrast           2 colour pairs read from CSS
+        ... 1 more (use --all)
+OK    reduced-motion     no animation found
+OK    viewport-height    no 100vh heights or clipped page root
+OK    focus-outline      focus ring kept or replaced
+OK    zoom-blocked       zoom is not restricted
+WARN  form-labels        2 form controls checked
+        line 313 <input type="file"> has no label, aria-label or title
+        line 332 <textarea> has no label, aria-label or title
+OK    img-alt            no <img> elements
+OK    control-name       5 buttons and links checked
+OK    positive-tabindex  no positive tabindex
+OK    click-target       inline click handlers are on interactive elements
+WARN  landmarks          no main landmark
+        line 1   no <main> element; screen reader users cannot jump to the content
+
+FAIL  1 fail, 3 warn, 13 ok
