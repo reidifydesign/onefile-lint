@@ -1,0 +1,35 @@
+{
+  "about": "Seed list for the monthly single-file web apps list. Each entry is checked by scripts/refresh-list.mjs. `url` is where people try it; `file` is the single file that gets linted (defaults to url). Licences are read from the GitHub repo and stored with the date they were read.",
+  "entries": [
+    {"id": "bento", "name": "Bento", "url": "https://bento.page/slides/", "repo": "nyblnet/bento", "blurb": "The office suite that fits in a file (the repo's own description)", "source": "https://news.ycombinator.com/item?id=49008211"},
+    {"id": "tiddlywiki", "name": "TiddlyWiki", "url": "https://tiddlywiki.com/", "file": "https://tiddlywiki.com/empty.html", "repo": "TiddlyWiki/TiddlyWiki5", "source": "https://github.com/calebmadrigal/Single-File-Web-Apps"},
+    {"id": "hypervault", "name": "HyperVault", "url": "https://hypervault.github.io/", "repo": "hypervault/hypervault.github.io", "source": "https://github.com/calebmadrigal/Single-File-Web-Apps"},
+    {"id": "notemode", "name": "NoteMode", "url": "https://vinarat0r.github.io/NoteMode/", "repo": "Vinarat0r/NoteMode", "source": "https://github.com/Vinarat0r/NoteMode"},
+    {"id": "linear-text", "name": "Linear Text", "url": "https://lineartext.com", "repo": "oidoid/linear-text", "source": "https://github.com/oidoid/linear-text"},
+    {"id": "slingcode", "name": "Slingcode", "url": "https://slingcode.net/", "repo": "chr15m/slingcode", "source": "https://github.com/calebmadrigal/Single-File-Web-Apps"},
+    {"id": "feather-wiki", "name": "Feather Wiki", "url": "https://feather.wiki/", "repo": "Alamantus/FeatherWiki", "source": "https://github.com/calebmadrigal/Single-File-Web-Apps"},
+    {"id": "fuzzygraph", "name": "FuzzyGraph", "url": "https://fuzzygraph.com/", "repo": "calebmadrigal/fuzzygraph", "source": "https://github.com/calebmadrigal/Single-File-Web-Apps"},
+    {"id": "offline-notepad", "name": "Offline Notepad", "url": "https://offlinenotepad.com", "repo": "schollz/offlinenotepad", "source": "https://github.com/schollz/offlinenotepad"},
+    {"id": "simonw-minesweeper", "name": "Minesweeper (simonw/tools)", "url": "https://tools.simonwillison.net/minesweeper", "file": "https://raw.githubusercontent.com/simonw/tools/main/minesweeper.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-pomodoro", "name": "Pomodoro (simonw/tools)", "url": "https://tools.simonwillison.net/pomodoro", "file": "https://raw.githubusercontent.com/simonw/tools/main/pomodoro.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-json-diff", "name": "JSON diff (simonw/tools)", "url": "https://tools.simonwillison.net/json-diff", "file": "https://raw.githubusercontent.com/simonw/tools/main/json-diff.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-image-to-jpeg", "name": "Image to JPEG (simonw/tools)", "url": "https://tools.simonwillison.net/image-to-jpeg", "file": "https://raw.githubusercontent.com/simonw/tools/main/image-to-jpeg.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-svg-render", "name": "SVG render (simonw/tools)", "url": "https://tools.simonwillison.net/svg-render", "file": "https://raw.githubusercontent.com/simonw/tools/main/svg-render.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-date-calculator", "name": "Date calculator (simonw/tools)", "url": "https://tools.simonwillison.net/date-calculator", "file": "https://raw.githubusercontent.com/simonw/tools/main/date-calculator.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-encrypt", "name": "Encrypt (simonw/tools)", "url": "https://tools.simonwillison.net/encrypt", "file": "https://raw.githubusercontent.com/simonw/tools/main/encrypt.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-flexbox-playground", "name": "Flexbox playground (simonw/tools)", "url": "https://tools.simonwillison.net/flexbox-playground", "file": "https://raw.githubusercontent.com/simonw/tools/main/flexbox-playground.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"},
+    {"id": "simonw-photo-scrubber", "name": "Photo scrubber (simonw/tools)", "url": "https://tools.simonwillison.net/photo-scrubber", "file": "https://raw.githubusercontent.com/simonw/tools/main/photo-scrubber.html", "repo": "simonw/tools", "source": "https://github.com/simonw/tools"}
+  ],
+  "licenses": {
+    "nyblnet/bento": {"license": "MIT", "read": "2026-09-30"},
+    "TiddlyWiki/TiddlyWiki5": {"license": "NOASSERTION", "read": "2026-09-30", "note": "GitHub could not classify the licence file"},
+    "hypervault/hypervault.github.io": {"license": null, "read": "2026-09-30", "note": "none stated in the repo"},
+    "Vinarat0r/NoteMode": {"license": null, "read": "2026-09-30", "note": "none stated in the repo"},
+    "oidoid/linear-text": {"license": "AGPL-3.0", "read": "2026-09-30"},
+    "chr15m/slingcode": {"license": "MIT", "read": "2026-09-30"},
+    "Alamantus/FeatherWiki": {"license": "AGPL-3.0", "read": "2026-09-30"},
+    "calebmadrigal/fuzzygraph": {"license": null, "read": "2026-09-30", "note": "none stated in the repo"},
+    "schollz/offlinenotepad": {"license": null, "read": "2026-09-30", "note": "none stated in the repo"},
+    "simonw/tools": {"license": "Apache-2.0", "read": "2026-09-30"}
+  }
+}

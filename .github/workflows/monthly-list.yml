@@ -1,0 +1,45 @@
+name: monthly-list
+
+# Re-checks every entry in awesome/apps.json and opens a pull request with the new numbers.
+# DISABLED until launch: the job only runs when the repository variable ENABLE_MONTHLY_LIST is "true".
+# Turn it on in Settings > Secrets and variables > Actions > Variables, after the repo is public.
+# The pull request step needs Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    if: ${{ vars.ENABLE_MONTHLY_LIST == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: node scripts/refresh-list.mjs --licenses
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Open a pull request if anything changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- awesome; then
+            echo "No change this month."
+            exit 0
+          fi
+          branch="list-refresh-$(date -u +%Y-%m)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add awesome
+          git commit -m "Refresh the single-file apps list ($(date -u +%Y-%m-%d))"
+          git push origin "$branch"
+          gh pr create --title "Refresh the single-file apps list ($(date -u +%Y-%m))" --body "Automated monthly check by scripts/refresh-list.mjs. Review the table in awesome/README.md and any entries that moved to Checked and left out."
