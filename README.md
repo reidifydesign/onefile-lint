@@ -24,6 +24,8 @@ What it found on its first real run, on 30 Sep 2026, across those 237 pages (com
 
 These are counts of what a static check can see in one author's pages. They are not a measure of how agents behave in general.
 
+**Credit.** The 237 pages come from [simonw/tools](https://github.com/simonw/tools), Simon Willison's public repo of single-file tools (Apache-2.0), used here with thanks. A large public corpus of single-file pages is what made a measurement like this possible. The counts are not a verdict on the pages: loading a library from a CDN is often a deliberate choice, and the rules only ask whether a page is still one file. The pages are not copied into this repo, and [`data/`](data/README.md) holds per-page rule results only.
+
 ## Use it
 
 ```sh
