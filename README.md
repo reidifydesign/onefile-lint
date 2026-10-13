@@ -71,7 +71,7 @@ As a library: `import { lint } from 'onefile-lint'` and call `lint(htmlString, o
 
 ### The single-file apps list
 
-[`awesome/`](awesome/README.md) is a list of single-file web apps where the size, offline status and licence are checked by script, not by opinion. A page is listed only if it passes the remote-dependency and sibling-file rules. `npm run list:refresh` rechecks it, and a monthly workflow in `.github/workflows/monthly-list.yml` does the same and opens a pull request. That workflow is switched off until the repo launches.
+[`awesome/`](awesome/README.md) is a list of single-file web apps where the size, offline status and licence are checked by script, not by opinion. A page is listed only if it passes the remote-dependency and sibling-file rules. `npm run list:refresh` rechecks it, and a monthly workflow in `.github/workflows/monthly-list.yml` does the same and opens a pull request. That workflow runs on the 1st of each month at 06:00 UTC and opens a pull request when a number changes.
 
 ## What it does not do
 

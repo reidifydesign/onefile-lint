@@ -1,8 +1,8 @@
 name: monthly-list
 
 # Re-checks every entry in awesome/apps.json and opens a pull request with the new numbers.
-# DISABLED until launch: the job only runs when the repository variable ENABLE_MONTHLY_LIST is "true".
-# Turn it on in Settings > Secrets and variables > Actions > Variables, after the repo is public.
+# Switched on 13 Oct 2026: the job only runs while the repository variable ENABLE_MONTHLY_LIST is "true", and it is.
+# To turn it off, set the variable to anything else in Settings > Secrets and variables > Actions > Variables.
 # The pull request step needs Settings > Actions > General > "Allow GitHub Actions to create and approve pull requests".
 
 on:
