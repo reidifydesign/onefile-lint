@@ -1,25 +1,25 @@
 # Single-file web apps, checked by script
 
-Checked 2026-09-30 with onefile-lint 0.1.0 (`npm run list:refresh`). A page is listed when its file has no remote dependency and no sibling file, so it still works if you save it and open it offline. "Offline" is **yes** when the page also makes no network calls of its own, and **partly** when it does.
+Checked 2026-11-01 with onefile-lint 0.1.0 (`npm run list:refresh`). A page is listed when its file has no remote dependency and no sibling file, so it still works if you save it and open it offline. "Offline" is **yes** when the page also makes no network calls of its own, and **partly** when it does.
 
 This list is checked, not endorsed. Licences are read from the GitHub repo and can lag; see the repo before reusing anything. Sizes are the file as served.
 
 | App | What the page says | Size | Offline | Licence | Checked |
 | --- | --- | ---: | --- | --- | --- |
-| [Bento](https://bento.page/slides/) | The office suite that fits in a file (the repo's own description) | 678 KB | yes | MIT | 2026-09-30 |
-| [Date calculator (simonw/tools)](https://tools.simonwillison.net/date-calculator) | Date Calculator | 13 KB | yes | Apache-2.0 | 2026-09-30 |
-| [Encrypt (simonw/tools)](https://tools.simonwillison.net/encrypt) | Encrypt / decrypt message | 12 KB | yes | Apache-2.0 | 2026-09-30 |
-| [Flexbox playground (simonw/tools)](https://tools.simonwillison.net/flexbox-playground) | Interactive CSS Flexbox Playground | 25 KB | yes | Apache-2.0 | 2026-09-30 |
-| [HyperVault](https://hypervault.github.io/) | Hypervault | 178 KB | yes | none stated | 2026-09-30 |
-| [Image to JPEG (simonw/tools)](https://tools.simonwillison.net/image-to-jpeg) | Drag and Drop Image Optimizer | 15 KB | yes | Apache-2.0 | 2026-09-30 |
-| [JSON diff (simonw/tools)](https://tools.simonwillison.net/json-diff) | JSON Diff Tool | 28 KB | yes | Apache-2.0 | 2026-09-30 |
-| [Linear Text](https://lineartext.com) | Linear Text | 8 KB | yes | AGPL-3.0 | 2026-09-30 |
-| [Minesweeper (simonw/tools)](https://tools.simonwillison.net/minesweeper) | Minesweeper | 16 KB | yes | Apache-2.0 | 2026-09-30 |
-| [NoteMode](https://vinarat0r.github.io/NoteMode/) | NoteMode | 154 KB | yes | none stated | 2026-09-30 |
-| [Photo scrubber (simonw/tools)](https://tools.simonwillison.net/photo-scrubber) | Photo Scrubber - local face blur & metadata removal | 64 KB | yes | Apache-2.0 | 2026-09-30 |
-| [Pomodoro (simonw/tools)](https://tools.simonwillison.net/pomodoro) | Pomodoro Timer | 12 KB | yes | Apache-2.0 | 2026-09-30 |
-| [SVG render (simonw/tools)](https://tools.simonwillison.net/svg-render) | SVG to JPEG/PNG | 15 KB | yes | Apache-2.0 | 2026-09-30 |
-| [TiddlyWiki](https://tiddlywiki.com/) | a non-linear personal web notebook | 2.4 MB | yes | not detected by GitHub | 2026-09-30 |
+| [Bento](https://bento.page/slides/) | The office suite that fits in a file (the repo's own description) | 700 KB | yes | MIT | 2026-11-01 |
+| [Date calculator (simonw/tools)](https://tools.simonwillison.net/date-calculator) | Date Calculator | 13 KB | yes | Apache-2.0 | 2026-11-01 |
+| [Encrypt (simonw/tools)](https://tools.simonwillison.net/encrypt) | Encrypt / decrypt message | 12 KB | yes | Apache-2.0 | 2026-11-01 |
+| [Flexbox playground (simonw/tools)](https://tools.simonwillison.net/flexbox-playground) | Interactive CSS Flexbox Playground | 25 KB | yes | Apache-2.0 | 2026-11-01 |
+| [HyperVault](https://hypervault.github.io/) | Hypervault | 178 KB | yes | none stated | 2026-11-01 |
+| [Image to JPEG (simonw/tools)](https://tools.simonwillison.net/image-to-jpeg) | Drag and Drop Image Optimizer | 15 KB | yes | Apache-2.0 | 2026-11-01 |
+| [JSON diff (simonw/tools)](https://tools.simonwillison.net/json-diff) | JSON Diff Tool | 28 KB | yes | Apache-2.0 | 2026-11-01 |
+| [Linear Text](https://lineartext.com) | Linear Text | 8 KB | yes | AGPL-3.0 | 2026-11-01 |
+| [Minesweeper (simonw/tools)](https://tools.simonwillison.net/minesweeper) | Minesweeper | 16 KB | yes | Apache-2.0 | 2026-11-01 |
+| [NoteMode](https://vinarat0r.github.io/NoteMode/) | NoteMode | 154 KB | yes | none stated | 2026-11-01 |
+| [Photo scrubber (simonw/tools)](https://tools.simonwillison.net/photo-scrubber) | Photo Scrubber - local face blur & metadata removal | 64 KB | yes | Apache-2.0 | 2026-11-01 |
+| [Pomodoro (simonw/tools)](https://tools.simonwillison.net/pomodoro) | Pomodoro Timer | 12 KB | yes | Apache-2.0 | 2026-11-01 |
+| [SVG render (simonw/tools)](https://tools.simonwillison.net/svg-render) | SVG to JPEG/PNG | 15 KB | yes | Apache-2.0 | 2026-11-01 |
+| [TiddlyWiki](https://tiddlywiki.com/) | a non-linear personal web notebook | 2.4 MB | yes | not detected by GitHub | 2026-11-01 |
 
 ## Checked and left out
 

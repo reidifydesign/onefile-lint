@@ -1,6 +1,6 @@
 {
  "tool": "onefile-lint 0.1.0",
- "checked": "2026-09-30",
+ "checked": "2026-11-01",
  "entries": [
   {
    "id": "bento",
@@ -9,10 +9,10 @@
    "file": "https://bento.page/slides/",
    "repo": "nyblnet/bento",
    "source": "https://news.ycombinator.com/item?id=49008211",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
-   "bytes": 694421,
-   "gzip": 558020,
+   "bytes": 716536,
+   "gzip": 575579,
    "title": "bento/slides",
    "blurb": "The office suite that fits in a file (the repo's own description)",
    "description": null,
@@ -43,7 +43,7 @@
    "unreachable_runs": 0,
    "license": "MIT",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "tiddlywiki",
@@ -52,7 +52,7 @@
    "file": "https://tiddlywiki.com/empty.html",
    "repo": "TiddlyWiki/TiddlyWiki5",
    "source": "https://github.com/calebmadrigal/Single-File-Web-Apps",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 2552335,
    "gzip": 454071,
@@ -85,8 +85,8 @@
    },
    "unreachable_runs": 0,
    "license": "NOASSERTION",
-   "license_note": "GitHub could not classify the licence file",
-   "license_read": "2026-09-30"
+   "license_note": null,
+   "license_read": "2026-11-01"
   },
   {
    "id": "hypervault",
@@ -95,7 +95,7 @@
    "file": "https://hypervault.github.io/",
    "repo": "hypervault/hypervault.github.io",
    "source": "https://github.com/calebmadrigal/Single-File-Web-Apps",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 181956,
    "gzip": 49676,
@@ -128,8 +128,8 @@
    },
    "unreachable_runs": 0,
    "license": null,
-   "license_note": "none stated in the repo",
-   "license_read": "2026-09-30"
+   "license_note": null,
+   "license_read": "2026-11-01"
   },
   {
    "id": "notemode",
@@ -138,7 +138,7 @@
    "file": "https://vinarat0r.github.io/NoteMode/",
    "repo": "Vinarat0r/NoteMode",
    "source": "https://github.com/Vinarat0r/NoteMode",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 157947,
    "gzip": 26388,
@@ -171,8 +171,8 @@
    },
    "unreachable_runs": 0,
    "license": null,
-   "license_note": "none stated in the repo",
-   "license_read": "2026-09-30"
+   "license_note": null,
+   "license_read": "2026-11-01"
   },
   {
    "id": "linear-text",
@@ -181,7 +181,7 @@
    "file": "https://lineartext.com",
    "repo": "oidoid/linear-text",
    "source": "https://github.com/oidoid/linear-text",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 8248,
    "gzip": 2641,
@@ -215,7 +215,7 @@
    "unreachable_runs": 0,
    "license": "AGPL-3.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "slingcode",
@@ -224,7 +224,7 @@
    "file": "https://slingcode.net/",
    "repo": "chr15m/slingcode",
    "source": "https://github.com/calebmadrigal/Single-File-Web-Apps",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 8681,
    "gzip": 3529,
@@ -258,7 +258,7 @@
    "unreachable_runs": 0,
    "license": "MIT",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "feather-wiki",
@@ -267,7 +267,7 @@
    "file": "https://feather.wiki/",
    "repo": "Alamantus/FeatherWiki",
    "source": "https://github.com/calebmadrigal/Single-File-Web-Apps",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 285386,
    "gzip": 79755,
@@ -301,7 +301,7 @@
    "unreachable_runs": 0,
    "license": "AGPL-3.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "fuzzygraph",
@@ -310,7 +310,7 @@
    "file": "https://fuzzygraph.com/",
    "repo": "calebmadrigal/fuzzygraph",
    "source": "https://github.com/calebmadrigal/Single-File-Web-Apps",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 1411208,
    "gzip": 370520,
@@ -343,8 +343,8 @@
    },
    "unreachable_runs": 0,
    "license": null,
-   "license_note": "none stated in the repo",
-   "license_read": "2026-09-30"
+   "license_note": null,
+   "license_read": "2026-11-01"
   },
   {
    "id": "offline-notepad",
@@ -353,7 +353,7 @@
    "file": "https://offlinenotepad.com",
    "repo": "schollz/offlinenotepad",
    "source": "https://github.com/schollz/offlinenotepad",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 2773,
    "gzip": 861,
@@ -386,8 +386,8 @@
    },
    "unreachable_runs": 0,
    "license": null,
-   "license_note": "none stated in the repo",
-   "license_read": "2026-09-30"
+   "license_note": null,
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-minesweeper",
@@ -396,7 +396,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/minesweeper.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 16176,
    "gzip": 4072,
@@ -430,7 +430,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-pomodoro",
@@ -439,7 +439,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/pomodoro.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 12002,
    "gzip": 2922,
@@ -473,7 +473,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-json-diff",
@@ -482,7 +482,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/json-diff.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 28212,
    "gzip": 6952,
@@ -516,7 +516,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-image-to-jpeg",
@@ -525,7 +525,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/image-to-jpeg.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 14864,
    "gzip": 3500,
@@ -559,7 +559,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-svg-render",
@@ -568,7 +568,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/svg-render.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 15822,
    "gzip": 4247,
@@ -602,7 +602,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-date-calculator",
@@ -611,7 +611,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/date-calculator.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 13224,
    "gzip": 2969,
@@ -645,7 +645,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-encrypt",
@@ -654,7 +654,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/encrypt.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 12043,
    "gzip": 3316,
@@ -688,7 +688,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-flexbox-playground",
@@ -697,7 +697,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/flexbox-playground.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 25664,
    "gzip": 4431,
@@ -731,7 +731,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   },
   {
    "id": "simonw-photo-scrubber",
@@ -740,7 +740,7 @@
    "file": "https://raw.githubusercontent.com/simonw/tools/main/photo-scrubber.html",
    "repo": "simonw/tools",
    "source": "https://github.com/simonw/tools",
-   "checked": "2026-09-30",
+   "checked": "2026-11-01",
    "reachable": true,
    "bytes": 65424,
    "gzip": 21287,
@@ -774,7 +774,7 @@
    "unreachable_runs": 0,
    "license": "Apache-2.0",
    "license_note": null,
-   "license_read": "2026-09-30"
+   "license_read": "2026-11-01"
   }
  ]
 }
